@@ -3,18 +3,18 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 import connectToMongoDB from './db/dbConnect.js'
-
 import authRoute from './routes/auth.routes.js';
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+app.use(express.json()); // to parse the incoming requests with JSON payload (from req.body)
 
-app.get('/', (req, res) => {
-    res.send("Server Index Route");
-});
+// app.get('/', (req, res) => {
+//     res.send("Server Index Route");
+// });
 
 app.use('/api/auth', authRoute);
 
