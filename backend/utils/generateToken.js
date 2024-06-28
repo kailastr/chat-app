@@ -5,6 +5,8 @@ const generateJWTandSetCookies = (userId, res) => {
         expiresIn: '15d'
     });
 
+    // console.log("token: ", token);
+
     res.cookie("jwt", token, {
         maxAge: 15 * 24 * 60 * 60 * 1000, //Max age of the cookie (15 days to be multiplied by hrs*mins*sec*miliSec)
         httpOnly: true, //to prevent XSS attacks

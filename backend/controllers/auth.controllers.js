@@ -70,6 +70,8 @@ export const login = async (req, res) => {
             return res.status(400).json({ error: "Invalid User Name or Password" });
         }
 
+        generateJWTandSetCookies(user._id, res)
+
         return res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
