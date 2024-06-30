@@ -2,10 +2,14 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
- 
+
+//DB import
 import connectToMongoDB from './db/dbConnect.js'
+
+//route import
 import authRoute from './routes/auth.routes.js';
 import messageRoute from './routes/message.routes.js'
+import userRoute from './routes/user.routes.js'
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +25,7 @@ app.use(cookieParser()); // to get datas from the cookies
 
 app.use('/api/auth', authRoute);
 app.use('/api/messages', messageRoute);
+app.use('/api/users', userRoute);
 
 //http://localhost:5000
 app.listen(PORT, () => {
