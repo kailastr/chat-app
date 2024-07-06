@@ -2,9 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../public/bg.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+@layer base {
+    body {
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../bg.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* to style the scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #555;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #121212;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #242424;
+    }
 }
