@@ -102,7 +102,9 @@ const SignUp = () => {
                     </div>
 
                     <div className='flex justify-center items-center mt-5'>
-                        <button className="btn glass btn-wide text-lg">Signup</button>
+                        <button className="btn glass btn-wide text-lg" disabled={loading}>
+                            {loading ? <span className='loading loading-spinner' /> : "Signup"}
+                        </button>
                     </div>
                 </form>
             </div>
