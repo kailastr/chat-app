@@ -1,13 +1,22 @@
-import React from 'react'
+import React from 'react';
+import useConversation from '../../zustand/useConversation.js';
 
-const Conversation = () => {
+const Conversation = ({ conversation, emoji, lastIndx }) => {
+
+  const { selectedConversation, setSelectedConversation } = useConversation();
+
+  const isSelected = selectedConversation?._id === conversation._id;
+
   return (
     <>
-      <div className='flex gap-2 items-center hover:bg-gray-500 rounded p-2 cursor-pointer '>
+      <div
+        className={`flex gap-2 items-center hover:bg-gray-500 rounded p-2 cursor-pointer ${isSelected ? "bg-gray-500" : ""}`}
+        onClick={() => setSelectedConversation(conversation)}
+      >
         <div className='avatar online'>
           <div className='w-12 rounded-full'>
             <img
-              src="https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png"
+              src={conversation.profilePic}
               alt="Profile Picture"
             />
           </div>
@@ -15,13 +24,13 @@ const Conversation = () => {
 
         <div className='flex flex-col flex-1'>
           <div className='flex gap-3 justify-between'>
-            <p className='font-semibold text-gray-200'>John Wich</p>
-            <span>❤️‍🔥</span>
+            <p className='font-semibold text-gray-200'>{conversation.fullName}</p>
+            <span>{emoji}</span>
           </div>
         </div>
       </div>
 
-      <div className='divider my-0 py-0 h-1' />
+      {!lastIndx && <div className='divider my-0 py-0 h-1' />}
     </>
   )
 }
