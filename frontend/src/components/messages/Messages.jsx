@@ -3,11 +3,15 @@ import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 import useGetMessages from '../../hooks/useGetMessages.js';
 import MessageSkeleton from '../../components/skeletons/MessageSkeletons.jsx';
+import useListenMessages from '../../hooks/useListenMessages.js';
 
 const Messages = () => {
 
     const { messages, loading } = useGetMessages();
     // console.log(" ithaane ", messages);
+
+    //for real-time messaging
+    useListenMessages();
 
     //to refer the last element
     const lastMessageRef = useRef(null);

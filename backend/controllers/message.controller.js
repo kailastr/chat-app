@@ -1,5 +1,8 @@
 import Conversation from "../models/conversation.model.js";
-import Message from '../models/message.model.js'
+import Message from '../models/message.model.js';
+
+//socket functionality
+import { getReceiverId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
     // console.log("Message sent id : ", req.params.id);
@@ -31,11 +34,16 @@ export const sendMessage = async (req, res) => {
             conversation.messages.push(newMessage._id);
         }
 
-        //SOCKET IO functionalities
-
         // await conversation.save();
         // await newMessage.save();    --- instead of using .save function for multiple data we could say
         await Promise.all([conversation.save(), newMessage.save()]); // in this way both the .save functions run in parallel
+
+        //SOCKET IO functionalities
+        const receiverSocketId = getReceiverId(receiverId);
+        if (receiverSocketId) {
+            //io.to(<socket.id>).emit() is used to send(emit) to a specific user
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
 
